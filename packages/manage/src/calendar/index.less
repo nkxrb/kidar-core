@@ -1,0 +1,51 @@
+.kidar-calendar {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.kidar-calendar-header{
+  display: flex;
+}
+
+.kidar-calendar-week {
+  width: calc(100%/7);
+  color: #303133;
+  font-size: 14px;
+  min-height: 20px;
+  overflow: hidden;
+}
+
+.kidar-calendar-week +.kidar-calendar-week{
+  margin-left: 8px;
+}
+
+.kidar-calendar-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.kidar-calendar-row {
+  display: flex;
+  position: relative;
+  height: 128px;
+}
+
+.kidar-calendar-date {
+  border-top: 2px solid #EEEFF3;
+  width: calc((100% - 48px)/7);
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.kidar-calendar-date-active {
+
+}
+
+.kidar-calendar-date-disabled {
+
+}
+
+.kidar-calendar-task {
+
+}
