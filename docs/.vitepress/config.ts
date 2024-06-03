@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -34,5 +35,10 @@ export default defineConfig({
   rewrites: {
     ':pkg/index.md': ':pkg/index.md',
     ':pkg/src/:subPkg/readme.md': ':pkg/:subPkg/index.md'
+  },
+  vite: {
+    plugins: [
+      vueJsx()
+    ]
   }
 })

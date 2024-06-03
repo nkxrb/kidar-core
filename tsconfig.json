@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "target": "ES2015",
+    "module": "ESNext",
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "types":["node", "vite/client"]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.vue",
+  ]
+}
