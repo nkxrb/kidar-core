@@ -1,0 +1,29 @@
+{
+  "name": "@kidar/monorepo",
+  "version": "0.0.1",
+  "description": "front cli",
+  "type": "module",
+  "author": {
+    "name": "nkxrb",
+    "email": "w626023781@163.com"
+  },
+  "private": false,
+  "scripts": {
+    "build": "pnpm -r --filter ./packages run build",
+    "dev": "pnpm -r --filter ./packages --parallel run dev",
+    "dev:manage": "pnpm -r --filter='@kidar/manage' dev",
+    "build:manage": "pnpm -r --filter='@kidar/manage' build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "ci:publish": "zx scripts/publish.mjs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vitepress": "^1.2.2",
+    "@types/node": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
