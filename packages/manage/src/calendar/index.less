@@ -36,16 +36,54 @@
   width: calc((100% - 48px)/7);
   overflow: hidden;
   border-radius: 1px;
+
+  &:hover{
+    background-color: #FAFAFA;
+  }
+}
+
+.kidar-calendar-date-title {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 4px;
+}
+
+.kidar-calendar-today {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  background-color: #F56C6C;
+  color: #fff;
+}
+
+.kidar-lunar-text {
+  font-size: 12px;
+  color: #A8ABB2;
+  margin-left: 8px;
 }
 
 .kidar-calendar-date-active {
-
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #F0F2F5;
+  }
 }
 
 .kidar-calendar-date-disabled {
-
+  opacity: .5;
 }
 
 .kidar-calendar-task {
-
+  font-size: 12px;
+  margin: 2px 0px;
+  height: 20px;
+  position: absolute;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
 }

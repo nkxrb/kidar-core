@@ -38,10 +38,10 @@ export default defineComponent({
       const { day, jieQi, jieRi, lunarDay, isToday } = d;
       const feb = jieRi?.join() || jieQi || lunarDay;
 
-      return <span class="t:inline-flex t:items-center t:h-[32px] t:w-[100%]">
-        {isToday ? <div class="t:rounded-[50%] t:bg-primary t:text-[#fff] t:w-[24px] t:h-[24px] t:leading-[24px] t:text-center t:text-[14px]">今</div> : <span class="t:font-600 t:text-[#001949]">{day}</span>}
-        <span class="">{feb}</span>
-      </span>;
+      return <div class="kidar-calendar-date-title">
+        {isToday ? <div class="kidar-calendar-today">今</div> : <span>{day}</span>}
+        <span class="kidar-lunar-text">{feb}</span>
+      </div>;
     };
 
     const renderCalendarBody = () => <div class="kidar-calendar-body">
@@ -55,7 +55,7 @@ export default defineComponent({
                   {renderCell(d)}
                 </div>;
               }
-              return <div class="kidar-calendar-date" style={`${i ? 'margin-left: 8px;' : ''} ${d.isToday && d.month === d.curMonth ? 'background-color: #F8F9FA;' : ''}`}>
+              return <div class="kidar-calendar-date" style={`${i ? 'margin-left: 8px;' : ''}`}>
                       {renderCell(d)}
                     </div>;
             })
