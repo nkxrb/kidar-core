@@ -1,18 +1,29 @@
+---
+title: 日历组件
+outline: deep
+---
+
 # 日历组件
 
-### DEMO演示
+## DEMO演示
+
 <script lang="ts" setup>
-import Calendar from './Calendar'
+import Demo from './demo/index'
 </script>
 
 <Card>
-  <Calendar />
+  <Demo />
 </Card>
 
-### 属性
+## 属性
 
 
-### 方法
+## 方法
 
 
-### 事件
+## 事件
+
+asdasa
+
+### 12312
+1231

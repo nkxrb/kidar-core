@@ -6,7 +6,12 @@ export default defineConfig({
   title: "kidar-base",
   description: "a lib site",
   srcDir: '../packages',
+  lang: 'zh',
   themeConfig: {
+    outline: {
+      label: '页面导航',
+      level: 'deep'
+    },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
@@ -18,6 +23,7 @@ export default defineConfig({
         text: '组件库',
         items: [
           { text: 'PC端', link: '/manage',
+            collapsed: false,
             items: [
               {text: '日历', link: '/manage/calendar'}
             ]
@@ -29,8 +35,12 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
+      { icon: 'github', link: 'https://github.com/nkxrb/kidar-core' }
+    ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2023-present Kidar'
+    }
   },
   rewrites: {
     ':pkg/index.md': ':pkg/index.md',

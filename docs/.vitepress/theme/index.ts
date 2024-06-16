@@ -3,6 +3,7 @@ import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Card from './components/Card.vue';
+import DemoPlayground from './components/DemoPlayground.vue';
 import './style.css'
 
 export default {
@@ -15,5 +16,6 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
     app.component('Card', Card);
+    app.component('DemoCode', DemoPlayground);
   }
 } satisfies Theme

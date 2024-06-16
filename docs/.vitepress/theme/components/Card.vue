@@ -4,6 +4,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+const slots = defineSlots()
+console.log(slots.default)
 
 </script>
 <style scoped>
