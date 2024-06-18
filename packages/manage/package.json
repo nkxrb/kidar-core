@@ -24,6 +24,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "peerDependencies": {
+    "ant-design-vue": "^4.2.3"
+  },
   "dependencies": {
     "lunar-typescript": "^1.7.5"
   },
