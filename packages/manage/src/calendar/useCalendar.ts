@@ -5,18 +5,19 @@ export interface Task {
   startTime: number,
   endTime: number,
   name: string,
-  id: string
+  id: string,
+  [key: string]: any
 }
 
 export interface CalendarItem {
-  curYear?: number,
-  curMonth?: number,
+  curYear: number,
+  curMonth: number,
   key: string,
-  year?: number,
-  month?: number,
-  day?: number,
-  week?: number,
-  date?: string,
+  year: number,
+  month: number,
+  day: number,
+  week: number,
+  date: string,
   lunarDay?: string,
   lunarMonth?: string,
   jieRi?: string[],
@@ -31,9 +32,6 @@ export interface DayTask extends Task {
   year: number,
   month: number,
   day: number,
-  textColor?: string,
-  bgColor?: string,
-  hoverBgColor?: string,
   date: string,
   moreNum?: number,
   tasks?: DayTask[]
@@ -142,34 +140,44 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
     return arr;
 
   });
+  const calendarRange = computed(() => {
+    const startDay = dates.value[0][0]
+    const endDay = dates.value[dates.value.length - 1][6]
+    return { startDay, endDay }
+  })
 
   const taskList = ref<Task[]>([]);
   const dayMap = ref<DayTaskMap>({});
 
   const setDayMap = () => {
     const list = data.value;
+    console.log('data', data.value);
     const map = {};
     if (list && list.length > 0){
       
       list.forEach((v: Task) => {
         const { name, id, startTime, endTime } = v;
-        const taskStart = new Date(startTime);
-        const taskEnd = new Date(endTime);
-        const startMonth = taskStart.getMonth() + 1;
-        const endMonth = taskEnd.getMonth() + 1;
-        if (startMonth > curMonth.value || endMonth < curMonth.value){
+        const taskStart = Solar.fromDate(new Date(startTime));
+        const taskEnd = Solar.fromDate(new Date(endTime));
+        const startDay = calendarRange.value.startDay
+        const endDay = calendarRange.value.endDay
+        const calendarStart = Solar.fromYmdHms(startDay.year, startDay.month, startDay.day, 0, 0, 0)
+        const calendarEnd = Solar.fromYmdHms(endDay.year, endDay.month, endDay.day, 23, 59, 59)
+        if (taskStart.isAfter(calendarEnd) || taskEnd.isBefore(calendarStart)) {
           return;
         }
 
-        const curMonthDays = SolarMonth.fromYm(curYear.value, curMonth.value).getDays().length as number;
         // 获取当前月内的任务开始时间
-        const start = startMonth === curMonth.value ? Solar.fromYmdHms(taskStart.getFullYear(), startMonth, taskStart.getDate(), 0, 0, 0) : Solar.fromYmdHms(curYear.value, curMonth.value, 1, 0, 0, 0);
-        let end = endMonth === curMonth.value ? Solar.fromYmdHms(taskEnd.getFullYear(), endMonth, taskEnd.getDate(), 23, 59, 59) : Solar.fromYmdHms(curYear.value, curMonth.value, curMonthDays, 23, 59, 59);
+        const start = taskStart.isBefore(calendarStart) ? calendarStart : Solar.fromYmdHms(taskStart.getYear(), taskStart.getMonth(), taskStart.getDay(), 0, 0, 0);
+        let end = taskEnd.isAfter(calendarEnd) ? calendarEnd : Solar.fromYmdHms(taskEnd.getYear(), taskEnd.getMonth(), taskEnd.getDay(), 23, 59, 59);
+        
         // 将任务的每一天进行切片存储
         let idx = 1;
         while (start.isBefore(end)) {
           const day = end.getDay();
-          const key = `${curYear.value}-${curMonth.value}-${day}`;
+          const year = end.getYear();
+          const month = end.getMonth();
+          const key = `${year}-${month}-${day}`;
           const endWeek = end.getWeek();
           if (endWeek === 0){
             idx = 1;
@@ -177,8 +185,8 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
           addMapItem(map, key, {
             idx, 
             week: endWeek || 7,
-            year: curYear.value,
-            month: curMonth.value,
+            year,
+            month,
             day,
             ...v
           });
@@ -199,14 +207,14 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
     const map: {[key: string]: DayTask} = {};
     const weekKeyArr: string[] = [];
     // 数据去重
-    row.forEach((d, i) => {
+    row.forEach((d) => {
       const { key, week } = d;
       weekKeyArr[week as number] = key;
       const taskArr = dayMap.value[key];
       if (taskArr && taskArr.length > 0){
-        taskArr.forEach((t: any) => {
-          if (!map[t.planId]){
-            map[t.planId] = { ...t, date: key };
+        taskArr.forEach((t: DayTask) => {
+          if (!map[t.id]){
+            map[t.id] = { ...t, date: key };
           }
         });
       }
@@ -273,8 +281,6 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
               year,
               month,
               day,
-              textColor: 'unset',
-              bgColor: 'unset',
               date: weekKeyArr[i + 1],
               moreNum: dayMap.value[weekKeyArr[i + 1]].length - fillNum,
               tasks
@@ -285,13 +291,15 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
       }
     }
 
+    console.log('renderRow', renderArr)
+
     return renderArr;
   };
 
   // 监听日期变化，获取对应日期的任务数据
   watch(() => data.value, () => {
     setDayMap();
-  });
+  }, {immediate: true});
 
   onActivated(() => {
     setDayMap();

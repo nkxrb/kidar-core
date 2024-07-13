@@ -3,7 +3,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "kidar-base",
+  title: "kidar-core",
   description: "a lib site",
   srcDir: '../packages',
   base: '/kidar-core/',
@@ -15,24 +15,21 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '文档', link: '/' },
+      { text: '演练场', link: '/playgrounds' }
     ],
 
     sidebar: [
+      { text: '图标', link: '/icons'},
       {
-        text: '组件库',
+        text: 'PC端', link: '/manage',
+        collapsed: false,
         items: [
-          { text: 'PC端', link: '/manage',
-            collapsed: false,
-            items: [
-              {text: '日历', link: '/manage/calendar'}
-            ]
-          },
-          { text: '小程序', link: '/mini' },
-          { text: '移动端', link: '/mobile' },
+          { text: '日历', link: '/manage/calendar' }
         ]
-      }
+      },
+      { text: '小程序', link: '/mini' },
+      { text: '移动端', link: '/mobile' },
     ],
 
     socialLinks: [

@@ -1,48 +1,37 @@
 import { computed, defineComponent, ref, watch } from 'vue';
 import { Solar } from 'lunar-typescript';
-import LeftArrow from '../icons/LeftArrow';
-import RightArrow from '../icons/RightArrow';
+import LeftArrow from '../../../icons/src/LeftArrow';
+import RightArrow from '../../../icons/src/RightArrow';
 
 export default defineComponent({
   props: {
-    value: {type: Number}
+    value: {type: String}
   },
-  emits: ['change'],
+  emits: ['update:value'],
   setup(props, { emit }) {
-    const curSolar = ref<Solar>(Solar.fromDate(new Date()));
-    watch(()=>props.value, (v)=>{
-      if(props.value){
-        curSolar.value = Solar.fromDate(new Date(Number(props.value)))
+    const curSolar = computed<Solar>({
+      get: () => Solar.fromDate(props.value ? new Date(props.value) : new Date()),
+      set: val => {
+        const dateStr = val.toYmd()
+        emit('update:value', dateStr)
       }
     })
 
     const preMonth = () => {
       curSolar.value = curSolar.value.nextMonth(-1);
-      emit('change',{
-        year: curYear.value,
-        month: curMonth.value,
-        solar: curSolar.value
-      })
     };
 
     const nextMonth = () => {
       curSolar.value = curSolar.value.nextMonth(1);
-      emit('change',{
-        year: curYear.value,
-        month: curMonth.value,
-        solar: curSolar.value
-      })
     };
 
     const curYear = computed(() => curSolar.value.getYear());
     const curMonth = computed(() => curSolar.value.getMonth());
 
-    return () => <div class="cfx-atm">
-      <div class="flex items-center flex-none">
-        <LeftArrow onClick={preMonth} />
-        <span class="font-600 px-20px">{curYear.value} 年 {curMonth.value} 月</span>
-        <RightArrow onClick={nextMonth} />
-      </div>
+    return () => <div class="kidar-month-select">
+      <LeftArrow onClick={preMonth} />
+      <span class="">{curYear.value} 年 {curMonth.value} 月</span>
+      <RightArrow onClick={nextMonth} />
     </div>;
   },
 });
