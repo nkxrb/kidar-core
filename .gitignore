@@ -3,4 +3,5 @@ pnpm-lock.yaml
 dist
 .temp
 .cache
-.vitepress/cache
+cache
+docs/.vitepress/cache

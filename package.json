@@ -10,7 +10,7 @@
   "private": false,
   "scripts": {
     "build": "pnpm -r --filter ./packages run build",
-    "dev": "pnpm -r --filter ./packages --parallel run dev",
+    "dev": "vitepress dev docs",
     "dev:manage": "pnpm -r --filter='@kidar/manage' dev",
     "build:manage": "pnpm -r --filter='@kidar/manage' build",
     "docs:dev": "vitepress dev docs",
