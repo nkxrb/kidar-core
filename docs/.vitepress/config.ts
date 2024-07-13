@@ -6,6 +6,7 @@ export default defineConfig({
   title: "kidar-base",
   description: "a lib site",
   srcDir: '../packages',
+  base: '/kidar-core/',
   lang: 'zh',
   themeConfig: {
     outline: {
