@@ -231,6 +231,7 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
       [0, 0, 0, 0, 0, 0, 0]
     ];
     const renderArr: DayTask[] = [];
+    const renderMaxRow: { idx: number, item: DayTask }[] = [];
     arr.forEach(a => {
       const startWeek = a.week - 1;
       const dayTaskArr = dayMap.value[a.date];
@@ -244,6 +245,9 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
         } else if (w === len - 1){ // 已经遍历到最后一个，都符合
           a.top = i;
           renderArr.push(a);
+          if (i == 3 && a.idx > 1) {
+            renderMaxRow[w] = { idx: renderArr.length - 1, item: a };
+          }
           for (let j = startWeek; j < len; j++){
             topArr[i][j] = 1;
           }
@@ -259,6 +263,23 @@ export const useCalendar = (data: Ref<Task[]>, curYear: Ref<number>, curMonth: R
         }
       }
     });
+
+    // 处理与更多选项同一行的数据，渲染溢出问题
+    if (renderMaxRow.length) {
+      renderMaxRow.forEach((item) => {
+        const t = item.item;
+        const itemLen = t.week + t.idx;
+        for (let a = t.week; a < itemLen; a++) {
+          if (topArr[3][a] === 2) {
+            renderArr.splice(item.idx, 1); // 移除这一条数据，改为更多
+            for (let b = itemLen - 1; b >= t.week - 1; b--) {
+              topArr[3][b] = 2
+            }
+            break;
+          }
+        }
+      })
+    }
 
     for (let i = 0; i < 7; i++){
       if (topArr[3][i] === 2){

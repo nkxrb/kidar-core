@@ -1,0 +1,33 @@
+{
+  "name": "@kidar/shared",
+  "version": "0.0.1",
+  "description": "front cli",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/kidar-shared.umd.cjs",
+  "module": "./dist/kidar-shared.js",
+  "exports": {
+    ".": {
+      "require": "./dist/kidar-shared.umd.cjs",
+      "import": "./dist/kidar-shared.js"
+    }
+  },
+  "author": {
+    "name": "nkxrb",
+    "email": "w626023781@163.com"
+  },
+  "private": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -10,9 +10,9 @@ export default defineComponent({
     const getData = (val: string) =>{
       const time = (val ? new Date(val) : new Date()).getTime();
       const res: Task[] = [];
-      for(let i=0; i<30; i++){
-        const startTime = time + Number(((Math.random() * 28 + Math.random() * (-6)) * 86400000).toFixed(0));
-        const endTime = startTime + Number((Math.random() * 1296000000).toFixed(0));
+      for(let i=0; i<10; i++){
+        const startTime = time + Number(((Math.random() * 28 + Math.random() * (-16)) * 86400000).toFixed(0));
+        const endTime = startTime + Number((Math.random() * 18 * 86400000).toFixed(0));
 
         res.push({
           startTime,

@@ -28,6 +28,7 @@
     "ant-design-vue": "^4.2.3"
   },
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "lunar-typescript": "^1.7.5"
   },
   "devDependencies": {
