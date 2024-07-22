@@ -1,3 +1,4 @@
+import Unocss from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 import vueJsx from "@vitejs/plugin-vue-jsx";
 
@@ -25,7 +26,8 @@ export default defineConfig({
         text: 'PC端', link: '/manage',
         collapsed: false,
         items: [
-          { text: '日历', link: '/manage/calendar' }
+          { text: '日历', link: '/manage/calendar' },
+          { text: '高级表格', link: '/manage/table-plus' },
         ]
       },
       { text: '小程序', link: '/mini' },
@@ -46,6 +48,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
+      Unocss(),
       vueJsx()
     ]
   }

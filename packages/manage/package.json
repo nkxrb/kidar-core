@@ -28,8 +28,11 @@
     "ant-design-vue": "^4.2.3"
   },
   "dependencies": {
+    "@kidar/shared": "workspace:*",
     "lodash-es": "^4.17.21",
-    "lunar-typescript": "^1.7.5"
+    "lunar-typescript": "^1.7.5",
+    "resize-observer-polyfill": "^1.5.1",
+    "sortablejs": "^1.15.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

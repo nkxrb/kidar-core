@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Card from './components/Card.vue';
 import DemoPlayground from './components/DemoPlayground.vue';
+import 'uno.css'
 import './style.css'
 
 export default {
