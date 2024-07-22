@@ -5,12 +5,12 @@ import { Solar } from 'lunar-typescript';
 
 export default defineComponent({
   props: {
-    date: {type: String},
+    date: {type: Object as () => Date, default: () => new Date()},
     data: {type: Array as ()=> Task[], default: ()=> []},
   },
   setup(props, {slots}) {
     const { data, date } = toRefs(props);
-    const curSolar = computed(() => Solar.fromDate(date.value ? new Date(date.value) : new Date()));
+    const curSolar = computed(() => Solar.fromDate(date.value || new Date()));
     const curYear = computed(() => curSolar.value.getYear());
     const curMonth = computed(() => curSolar.value.getMonth());
 
@@ -43,12 +43,12 @@ export default defineComponent({
               return '';
             }
             if (t.moreNum) {
-              return slots.moreTask ? slots.moreTask(t) : <div class="kidar-calendar-task"
+              return <div class="kidar-calendar-task"
                 style={`
                       left:calc((100% - 48px)*${t.week - 1}/7 + ${(t.week - 1) * 8}px);
                       top:${t.top * 22 + 32}px;
                     `}>
-                <div class="kidar-calendar-task-more">{`还有${t.moreNum}项...`}</div>
+                <div class="kidar-calendar-task-more">{slots.moreTask ? slots.moreTask(t) : `还有${t.moreNum}项...`}</div>
               </div>;
             }
             return <div class="kidar-calendar-task"
