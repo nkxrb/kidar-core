@@ -1,14 +1,14 @@
 import { Table, Tooltip } from 'ant-design-vue';
 import { FilterValue, SorterResult, TablePaginationConfig } from 'ant-design-vue/lib/table/interface';
-import { computed, defineComponent, DefineComponent, h, onMounted, reactive, ref, VNode, watch } from 'vue';
-import IconTip from '../../../icons/IconTip';
+import { defineComponent, ref, watch, DefineComponent, h, onMounted, reactive, computed, VNode } from 'vue';
+import OperationCell from './operation-cell';
 import useAutoHeight from './hooks/useAutoHeight';
 import { useColumn } from './hooks/useColumn';
 import { usePagination } from './hooks/usePagination';
-import useRowDragSort from './hooks/useRowDragSort';
-import { useSelectRow } from './hooks/useSelectRow';
 import { useSorter } from './hooks/useSorter';
-import OperationCell from './operation-cell';
+import { useSelectRow } from './hooks/useSelectRow';
+import useRowDragSort from './hooks/useRowDragSort';
+import IconTip from '../../../icons/src/IconTip';
 
 export type AnyObj = {
   [key: string]: any

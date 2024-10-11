@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { TablePlus } from '../index';
+import { TablePlus } from '../src/index';
 import { getTableColumns, getTableData } from './data';
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 <template>
-  <div class="kidar-demo-card">
+  <div class="kidar-demo-card vp-raw">
     <slot></slot>
   </div>
 </template>

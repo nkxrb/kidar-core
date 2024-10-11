@@ -1,0 +1,51 @@
+{
+  "name": "@kidar/ant-table-plus",
+  "version": "0.0.1",
+  "description": "front cli",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/kidar-ant-table-plus.umd.cjs",
+  "module": "./dist/kidar-ant-table-plus.js",
+  "exports": {
+    ".": {
+      "require": "./dist/kidar-ant-table-plus.umd.cjs",
+      "import": "./dist/kidar-ant-table-plus.js"
+    }
+  },
+  "author": {
+    "name": "nkxrb",
+    "email": "w626023781@163.com"
+  },
+  "private": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "ant-design-vue": "^4.2.3"
+  },
+  "dependencies": {
+    "@kidar/shared": "workspace:*",
+    "lodash-es": "^4.17.21",
+    "resize-observer-polyfill": "^1.5.1",
+    "sortablejs": "^1.15.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vue/babel-plugin-jsx": "^1.2.2",
+    "@vue/compiler-sfc": "^3.4.27",
+    "@vue/runtime-core": "^3.4.27",
+    "@vue/runtime-dom": "^3.4.27",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "vite": "^5.2.0",
+    "vue": "^3.4.21"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -10,10 +10,7 @@ outline: deep
 <script lang="ts" setup>
 import Demo from './demo/index'
 </script>
-
-<Card>
-  <Demo />
-</Card>
+<Card><Demo /></Card>
 
 ## 属性
 

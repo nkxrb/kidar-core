@@ -1,7 +1,7 @@
-import { computed, defineComponent, ref, watch } from 'vue';
-import { Calendar, MonthSelect } from '../index';
-import { DayTask, Task } from '../useCalendar';
 import { Checkbox, Tooltip } from 'ant-design-vue';
+import { computed, defineComponent, ref, watch } from 'vue';
+import { Calendar, MonthSelect } from '../src/index';
+import { DayTask, Task } from '../src/useCalendar';
 import { getData } from './data';
 
 export default defineComponent({
